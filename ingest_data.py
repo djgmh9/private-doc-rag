@@ -4,7 +4,8 @@ from uuid import uuid4
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 from dotenv import load_dotenv
-
+import tiktoken
+from langchain_text_splitters import TokenTextSplitter
 
 load_dotenv()
 
@@ -15,13 +16,7 @@ CHROMA_PATH = r"chroma_langchain_db"
 # initiate the embeddings model
 embeddings_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
-# select a vector store
-
-vector_store = Chroma(
-    collection_name="example_collection",
-    embedding_function=embeddings_model,
-    persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
-)
+encoding = tiktoken.encoding_for_model('gpt-4o-mini')
 
 # initiate the vector store
 vector_store = Chroma(
