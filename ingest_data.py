@@ -38,11 +38,15 @@ text_splitter = RecursiveCharacterTextSplitter(
     is_separator_regex=False,
 )
 
+
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,  # chunk size (characters)
+    chunk_overlap=200,  # chunk overlap (characters)
+    add_start_index=True,  # track index in original document
+)
+
 # creating the chunks
 chunks = text_splitter.split_documents(raw_documents)
 
-# creating unique ID's
-uuids = [str(uuid4()) for _ in range(len(chunks))]
-
 # adding chunks to vector store
-vector_store.add_documents(documents=chunks, ids=uuids)
+vector_store.add_documents(documents=chunks)
