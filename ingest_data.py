@@ -1,6 +1,5 @@
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from uuid import uuid4
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 from dotenv import load_dotenv
@@ -15,8 +14,6 @@ CHROMA_PATH = r"chroma_langchain_db"
 
 # initiate the embeddings model
 embeddings_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
-
-encoding = tiktoken.encoding_for_model('gpt-4o-mini')
 
 # initiate the vector store
 vector_store = Chroma(
